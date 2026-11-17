@@ -1,0 +1,277 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gradely | Student Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <span class="logo-icon">G</span>
+            <h2>Gradely</h2>
+        </div>
+
+        <p class="menu-title">MENU</p>
+
+        <nav>
+            <a href="#dashboard" class="nav-link active">
+                <span>▦</span> Dashboard
+            </a>
+
+            <a href="#calculator" class="nav-link">
+                <span>▤</span> Grade Calculator
+            </a>
+
+            <a href="#analytics" class="nav-link">
+                <span>▥</span> Analytics
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <p>Student Edition</p>
+            <small>Academic Performance Tracker</small>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- HEADER -->
+        <header class="topbar">
+
+            <div>
+                <p class="welcome">WELCOME BACK 👋</p>
+                <h1>Student Dashboard</h1>
+                <p class="description">
+                    Track your academic performance in one place.
+                </p>
+            </div>
+
+            <button id="themeToggle" class="theme-btn" type="button">
+                🌙 Dark Mode
+            </button>
+
+        </header>
+
+
+        <!-- STUDENT PROFILE -->
+        <section class="glass profile-card">
+
+            <div class="profile-icon">👨‍🎓</div>
+
+            <div class="profile-info">
+                <h3 id="displayName">Student Name</h3>
+                <p id="displayRoll">Roll Number: Not provided</p>
+            </div>
+
+            <div class="profile-inputs">
+
+                <input type="text" id="studentName"
+                       placeholder="Enter student name">
+
+                <input type="text" id="rollNumber"
+                       placeholder="Enter roll number">
+
+                <button id="saveProfile" type="button">
+                    Save Profile
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- DASHBOARD -->
+        <section id="dashboard">
+
+            <h2 class="section-title">Academic Overview</h2>
+
+            <div class="stats-grid">
+
+                <div class="glass stat-card">
+                    <div class="stat-icon purple">📚</div>
+                    <p>Total Marks</p>
+                    <h2 id="totalMarks">0 / 500</h2>
+                    <small>Across 5 subjects</small>
+                </div>
+
+                <div class="glass stat-card">
+                    <div class="stat-icon blue">📈</div>
+                    <p>Percentage</p>
+                    <h2 id="percentage">0%</h2>
+                    <small>Overall average</small>
+                </div>
+
+                <div class="glass stat-card">
+                    <div class="stat-icon orange">🏆</div>
+                    <p>Grade</p>
+                    <h2 id="grade">--</h2>
+                    <small>Academic grade</small>
+                </div>
+
+                <div class="glass stat-card">
+                    <div class="stat-icon green">✓</div>
+                    <p>Result Status</p>
+                    <h2 id="status">Pending</h2>
+                    <small>Final result</small>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- GRADE CALCULATOR -->
+        <section id="calculator" class="glass calculator-card">
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Grade Calculator</h2>
+                    <p>Enter your marks for each subject.</p>
+                </div>
+
+                <span class="tag">MAX 100 / SUBJECT</span>
+
+            </div>
+
+
+            <form id="gradeForm">
+
+                <div class="subject-grid">
+
+                    <div class="input-group">
+                        <label>Mathematics</label>
+                        <input type="number" class="marks"
+                               placeholder="0 - 100"
+                               min="0" max="100" step="1" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Physics</label>
+                        <input type="number" class="marks"
+                               placeholder="0 - 100"
+                               min="0" max="100" step="1" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Chemistry</label>
+                        <input type="number" class="marks"
+                               placeholder="0 - 100"
+                               min="0" max="100" step="1" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Computer Science</label>
+                        <input type="number" class="marks"
+                               placeholder="0 - 100"
+                               min="0" max="100" step="1" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>English</label>
+                        <input type="number" class="marks"
+                               placeholder="0 - 100"
+                               min="0" max="100" step="1" required>
+                    </div>
+
+                </div>
+
+
+                <div class="button-group">
+
+                    <button type="submit" class="calculate-btn">
+                        Calculate Results →
+                    </button>
+
+                    <button type="button" id="resetBtn"
+                            class="reset-btn">
+                        Reset
+                    </button>
+
+                </div>
+
+            </form>
+
+            <p id="errorMessage" class="error-message"></p>
+
+        </section>
+
+
+        <!-- ANALYTICS -->
+        <section id="analytics" class="glass analytics-card">
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Performance Analytics</h2>
+                    <p>Compare your subject-wise marks.</p>
+                </div>
+
+                <span class="tag">LIVE ANALYSIS</span>
+
+            </div>
+
+            <div class="chart-container">
+                <canvas id="performanceChart"></canvas>
+            </div>
+
+        </section>
+
+
+        <!-- FINAL RESULT -->
+        <section id="resultCard" class="glass result-card">
+
+            <h2>Final Result</h2>
+
+            <div class="result-content">
+
+                <div>
+                    <p>Percentage Achieved</p>
+                    <h1 id="finalPercentage">0%</h1>
+                </div>
+
+                <div class="final-grade">
+                    <p>Your Grade</p>
+                    <h1 id="finalGrade">--</h1>
+                </div>
+
+            </div>
+
+            <p id="finalMessage">
+                Calculate your marks to see your result.
+            </p>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer>
+            © 2026 Gradely | Student Performance Dashboard
+        </footer>
+
+    </main>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
